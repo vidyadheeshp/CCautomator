@@ -293,33 +293,8 @@ include('pages/required/tables.php');
 				<!-- ************************************The Page Content has to be Added Here **********************************************-->
 
 				<div class="row">
-	        <div class="col-md-8">
-	          <div class="box box-solid">
-	            <div class="box-header with-border">
-	              <h4 class="box-title">Draggable Events</h4>
-	            </div>
-	            <div class="box-body">
-	            		
-	              <!-- the events -->
-	              <div id="external-events">
-	                <div class="external-event bg-green">Lunch</div>
-	                <div class="external-event bg-yellow">Go home</div>
-	                <div class="external-event bg-aqua">Do homework</div>
-	                <div class="external-event bg-light-blue">Work on UI design</div>
-	                <div class="external-event bg-red">Sleep tight</div>
-	                <div class="checkbox">
-	                  <label for="drop-remove">
-	                    <input type="checkbox" id="drop-remove">
-	                    remove after drop
-	                  </label>
-	                </div>
-	              </div>
-	            </div>
-	            <!-- /.box-body -->
-	          </div>
-	          <!-- /. box -->
-	        </div> 
-	      <div class="col-md-4 	">
+	         
+	      <div class="col-md-12">
 	          <div class="box box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">Create Event</h3>
@@ -348,7 +323,7 @@ include('pages/required/tables.php');
 	            		</div>
 	            		<div class="clearfix"></div>
 
-	              <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
+	              <div class="btn-group col-md-4" style="width: 100%; margin-bottom: 10px;">
 	                <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
 	                <ul class="fc-color-picker" id="color-chooser">
 	                  <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
@@ -367,7 +342,7 @@ include('pages/required/tables.php');
 	                </ul>
 	              </div>
 	              <!-- /btn-group -->
-	              <div class="input-group">
+	              <div class="input-group col-md-4">
 	                <input id="new-event" type="text" class="form-control" placeholder="Event Title">
 
 	                <div class="input-group-btn">
