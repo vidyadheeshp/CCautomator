@@ -495,17 +495,16 @@ $(function() {
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
+     defaultView: 'agendaWeek',
       buttonText: {
         today: 'today',
         month: 'month',
         week: 'week',
         day: 'day'
       },
-      initialView: 'timeGridWeek',
       hiddenDays: [ 0 ],
-      slotMinTime : "08:00:00",
-      slotMaxTime : "17:00:00",
-      //defaultView: 'timeGridDay',
+      minTime: "08:00:00",
+      maxTime: "18:00:00",
       //Random default events
       events: [
         {
