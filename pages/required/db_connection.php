@@ -3,7 +3,7 @@ ini_set('MAX_EXECUTION_TIME', -1);
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$database = 'resmanager';
+$database = 'laballocator';
 $con=mysqli_connect($dbhost, $dbuser, $dbpass, $database);
 	// Check connection
 	 if(!$con )
