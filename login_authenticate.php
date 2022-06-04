@@ -17,17 +17,16 @@
 				$query = "SELECT 
 								* 
 						  FROM 
-								user_master
+								users
 						 WHERE 
-								USERNAME ='".$uname."' AND PASSWORD ='".$encrypted_password."';";
+								username ='".$uname."' AND password ='".$encrypted_password."';";
 				$result = db_one($query);
 				//print_r ($result);
 				//break;
 				if($result!=NULL){
 				    //print_r ($result);
-					$_SESSION['s_id']=$result['SNO'];
-					$_SESSION['name']=$result['NAME'];
-					$_SESSION['dept']=$result['DEPT_ID'];
+					$_SESSION['s_id']=$result['id'];
+					$_SESSION['name']=$result['name'];
 					$_SESSION['logged_in']=1;
 					//$_SESSION['sno']=$result[0];
 					    header('Location: index.php');

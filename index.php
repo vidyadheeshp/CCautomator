@@ -1,28 +1,28 @@
 <?php ini_set('display_errors', 1);
  
-	/*if (session_id() == '') {
+	if (session_id() == '') {
     session_start();
 	$login_id = $_SESSION['s_id'];
-	$dept_id = $_SESSION['dept'];
+	//$dept_id = $_SESSION['dept'];
 }
 
- /*if(!isset($_SESSION['logged_in'])) {
+ if(!isset($_SESSION['logged_in'])) {
       header("Location: login.php"); 
- }  */
+ }  
 include('pages/required/db_connection.php');
 include('pages/required/functions.php');
 include('pages/required/tables.php');
 
 
-/*	$loggen_in_query = "SELECT 
+	$loggen_in_query = "SELECT 
 									um.*
-									,DATE_FORMAT(um.CDATE, '%b %Y') AS member_since
+
 								FROM 
-									user_master um
+									users um
 								WHERE
 									1=1
-									AND um.SNO=".$login_id;
-			$login_query_result = db_one($loggen_in_query);*/
+									AND um.id=".$login_id;
+			$login_query_result = db_one($loggen_in_query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -179,9 +179,9 @@ include('pages/required/tables.php');
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="images/GIT-logo.jpg<?php //echo ($login_query_result['pro_image'] == NULL ? 'boxed-bg.jpg' : $login_query_result['pro_image']);?>" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php //if(isset($_SESSION['name'])) {
-					  //echo  $_SESSION['name'];
-					//}?>
+              <span class="hidden-xs"><?php if(isset($_SESSION['name'])) {
+					  echo  $_SESSION['name'];
+					}?>
 			   </span>
             </a>
             <ul class="dropdown-menu">

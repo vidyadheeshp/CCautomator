@@ -1,28 +1,28 @@
 <?php ini_set('display_errors', 1);
  
-	/*if (session_id() == '') {
+if (session_id() == '') {
     session_start();
 	$login_id = $_SESSION['s_id'];
-	$dept_id = $_SESSION['dept'];
+	//$dept_id = $_SESSION['dept'];
 }
 
- /*if(!isset($_SESSION['logged_in'])) {
+ if(!isset($_SESSION['logged_in'])) {
       header("Location: login.php"); 
- }  */
+ }  
 include('pages/required/db_connection.php');
 include('pages/required/functions.php');
 include('pages/required/tables.php');
 
 
-/*	$loggen_in_query = "SELECT 
+	$loggen_in_query = "SELECT 
 									um.*
-									,DATE_FORMAT(um.CDATE, '%b %Y') AS member_since
+
 								FROM 
-									user_master um
+									users um
 								WHERE
 									1=1
-									AND um.SNO=".$login_id;
-			$login_query_result = db_one($loggen_in_query);*/
+									AND um.id=".$login_id;
+			$login_query_result = db_one($loggen_in_query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -179,9 +179,9 @@ include('pages/required/tables.php');
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="images/GIT-logo.jpg<?php //echo ($login_query_result['pro_image'] == NULL ? 'boxed-bg.jpg' : $login_query_result['pro_image']);?>" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php //if(isset($_SESSION['name'])) {
-					  //echo  $_SESSION['name'];
-					//}?>
+              <span class="hidden-xs"><?php if(isset($_SESSION['name'])) {
+					  echo  $_SESSION['name'];
+					}?>
 			   </span>
             </a>
             <ul class="dropdown-menu">
@@ -242,7 +242,7 @@ include('pages/required/tables.php');
 				  </span>
 			</div>
 		  </form>
-		<!-- /.sidebar -->
+		< /.sidebar -->
 		<ul class="sidebar-menu">
 			<li class="header">MAIN NAVIGATION</li>
 			<?php //principal Section
@@ -302,29 +302,24 @@ include('pages/required/tables.php');
 	            <div class="box-body">
 	            		<div class="col-md-4">
 	            			<select class="form-control">
-	            				<option>Lab 1A</option>
-	            				<option>Lab 1B</option>
-	            				<option>Lab 2</option>
-	            				<option>Lab 3</option>
-	            				<option>Lab 4</option>
-	            				<option>Lab 5</option>
-	            				<option>Lab 6</option>
-	            				<option>Lab 7</option>
-	            				<option>Lab 8</option>
-	            				<option>Lab 9</option>
-	            				<option>Lab 10</option>
-	            				<option>Lab 11</option>
-	            				<option>Lab 12</option>
-	            				<option>Lab 13</option>
-	            				<option>Lab 14</option>
-	            				<option>Lab 15 (MBA)</option>
-	            
+	            				<option val="0">choose one</option>
+	            				<?php 
+	            				$lab_list_str = '';
+	            					$lab_query = "SELECT * FROM labs WHERE 1=1";
+	            					$lab_list = db_all($lab_query);
+	            					foreach($lab_list AS $labname){
+	            							$lab_list_str .="<option val='".$labname['id']."''>".$labname['labname']."</option>"; 
+
+	            					}
+	            					echo $lab_list_str;
+	            				?>
+	            				
 	            			</select>
 	            		</div>
 	            		<div class="clearfix"></div>
 
-	              <div class="btn-group col-md-4" style="width: 100%; margin-bottom: 10px;">
-	                <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+	              <!--div class="btn-group col-md-4" style="width: 100%; margin-bottom: 10px;">
+	                <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>>
 	                <ul class="fc-color-picker" id="color-chooser">
 	                  <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
 	                  <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
@@ -340,16 +335,16 @@ include('pages/required/tables.php');
 	                  <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
 	                  <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
 	                </ul>
-	              </div>
-	              <!-- /btn-group -->
+	              </div-->
+	              <!-- /btn-group >
 	              <div class="input-group col-md-4">
 	                <input id="new-event" type="text" class="form-control" placeholder="Event Title">
 
 	                <div class="input-group-btn">
 	                  <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
 	                </div>
-	                <!-- /btn-group -->
-	              </div>
+	                < /btn-group >
+	              </div-->
 	              <!-- /input-group -->
 	            </div>
 	          </div>
@@ -506,9 +501,9 @@ $(function() {
       minTime: "08:00:00",
       maxTime: "18:00:00",
       //Random default events
-      events: 'calender_events.php',
-      /*editable: true,
-      droppable: true, // this allows things to be dropped onto the calendar !!!
+      events : 'calender_events.php',
+      editable: true,
+     /* droppable: true, // this allows things to be dropped onto the calendar !!!
       drop: function (date, allDay) { // this function is called when something is dropped
 
         // retrieve the dropped element's stored Event Object

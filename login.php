@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Location" content="index.php">
-  <title>ResManager | Log in</title>
+  <title>Computer Center | Lab Allocator</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -80,7 +80,7 @@
 	
 		<div class="login-box">
 			  <div class="login-logo">
-				<a href="#"><b>Resolution Manager</b></a>
+				<a href="#"><b>Lab Allocator</b></a>
 			  </div>
 			  <!-- /.login-logo -->
 			  <div class="login-box-body" >
@@ -129,7 +129,7 @@
 		<h4>Prof. Vidyadheesh Pandurangi</h3>
 		<h5>Contact : +91-8095013250</h5>
 		<h5>Email : vjpandurangi@git.edu</h5>
-        <h5>InterCom : 374</h5>
+        <h5>InterCom : 274</h5>
   </div>
   <!-- /.login-box-body -->
 </div>

@@ -1,5 +1,5 @@
 <?php
-ini_set('MAX_EXECUTION_TIME', -1);
+//ini_set('MAX_EXECUTION_TIME', -1);
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
