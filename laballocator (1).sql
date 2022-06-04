@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2022 at 01:25 PM
+-- Generation Time: Jun 04, 2022 at 10:04 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -89,7 +89,8 @@ INSERT INTO `departments` (`DeptID`, `Name`, `UserName`, `Password`, `DateStmp`)
 
 CREATE TABLE `laballocations` (
   `allocationid` int(11) NOT NULL,
-  `day` date NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
   `slot` int(11) NOT NULL,
   `coursecode` int(11) NOT NULL,
   `batchno` int(11) NOT NULL,
@@ -101,9 +102,9 @@ CREATE TABLE `laballocations` (
 -- Dumping data for table `laballocations`
 --
 
-INSERT INTO `laballocations` (`allocationid`, `day`, `slot`, `coursecode`, `batchno`, `academicyear`, `labid`) VALUES
-(1, '2022-06-01', 1, 1, 1, '2022-23', 1),
-(2, '2022-06-02', 2, 1, 2, '2022-23', 3);
+INSERT INTO `laballocations` (`allocationid`, `start`, `end`, `slot`, `coursecode`, `batchno`, `academicyear`, `labid`) VALUES
+(1, '2022-06-01 08:30:00', '2022-06-01 11:30:00', 1, 1, 1, '2022-23', 1),
+(2, '2022-06-01 11:30:00', '2022-06-01 14:00:00', 2, 1, 2, '2022-23', 3);
 
 -- --------------------------------------------------------
 
@@ -156,6 +157,28 @@ CREATE TABLE `slotbooking` (
   `academicyear` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `email` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `password`, `email`) VALUES
+(1, 'admin', 'cc@git.edu', 'ca04c3b84a22b5fa4ea6e7ad8ee78999', 'cc@git.edu'),
+(2, 'user1', 'user1@git.edu', 'ca04c3b84a22b5fa4ea6e7ad8ee78999', 'user1@git.edu');
+
 --
 -- Indexes for dumped tables
 --
@@ -195,6 +218,12 @@ ALTER TABLE `slotbooking`
   ADD PRIMARY KEY (`bookid`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -221,6 +250,12 @@ ALTER TABLE `labs`
 --
 ALTER TABLE `slotbooking`
   MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
