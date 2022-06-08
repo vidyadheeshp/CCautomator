@@ -223,12 +223,12 @@ include('pages/required/tables.php');
 			  <img src="images/GIT-logo.jpg<?php //echo ($login_query_result['pro_image'] == NULL ? 'boxed-bg.jpg' : $login_query_result['pro_image']);?>" class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-			  <p><?php /*if(isset($_SESSION['name'])) {echo  $_SESSION['name'];}?></p>
-			 <?php if($login_query_result ['USERTYPE'] == 1 || $login_query_result ['USERTYPE'] == 2 || $login_query_result ['USERTYPE'] == 6){*/?>
+			  <p><?php if(isset($_SESSION['name'])) {echo  $_SESSION['name'];}?></p>
+			 <?php if($login_query_result ['id'] == 1){?>
 				  <a href="#"><i class="fa fa-circle text-success"></i> Admin</a>
-				<?php //}else{?>
+				<?php }else{?>
 				  <a href="#"><i class="fa fa-circle text-aqua"></i> User</a>
-				<?php //}?>
+				<?php }?>
 			</div>
 		  </div>
 		  <span style="height:50px;" id="clock" class="form-control" value=""></span>
@@ -285,21 +285,211 @@ include('pages/required/tables.php');
 
     <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        
-      </div>
-      <!-- /.row -->
+     
       <!-- Main row -->
-        <div class="row">
-			<!-- Left col -->
-			<section class="col-lg-12 connectedSortable">
-				
-			
-		  <!-- /.row (main row) -->
-	</section>
+      <div class="row">
+					<!-- Left col -->
+					<section class="col-lg-12 connectedSortable">
+						
+				  <?php 
+				  	if($login_query_result ['id'] == 1){
+				  ?>
+					 	<div class="col-md-12">
+		          <div class="box box-solid">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">Lab Allocations Tasks</h3>
+		            </div>
+		            <div class="box-body">
+		           				<div class="col-md-6">
+		            					<button class="btn btn-primary set_date_button"><i class="fa fa-calendar"></i> Set Date</button>
+		            					<div class="clearfix"></div>
+		            					<div class="clearfix"></div>
+		            					<br/>
+		            					<div class="col-md-6 calender_div hidden">
 
-		</div>
+		            							 <!-- Date range -->
+								              <div class="form-group">
+								                <div class="input-group">
+								                  <div class="input-group-addon">
+								                    <i class="fa fa-calendar"></i>
+								                  </div>
+								                  <input type="text" class="form-control pull-right" id="reservation">
+								                </div>
+
+								                <!-- /.input group -->
+								              </div>
+								              <!-- /.form group -->
+								              
+		            					</div>
+		            					 <button class="btn btn-primary set_button hidden"><i class="fa fa-check"></i> Set</button>
+		            					<div class="col-ms-6">
+		            						
+		            					</div>
+		            			</div>
+		            			<div class="col-md-6">
+		            					<button class="btn btn-success allocate_slots"><i class="fa fa-tasks"></i> Allocate</button>
+		            					
+		            			</div>
+
+		          </div>
+		          </div>
+	        </div>
+					<?php
+					//content of Login for other users 
+				}else{
+					?>
+					<div class="col-lg-3 col-xs-6 col-md-4">
+				  <!-- small box -->
+						<div class="small-box bg-aqua">
+							<div class="inner">
+							 <?php //$res_count_query ="SELECT count(*) AS res_count FROM res_master rm WHERE 1=1";
+								// $Resolutions_count = db_one($res_count_query);
+							?>
+							  <h3><?php //echo($Resolutions_count['res_count']); ?></h3>
+
+							  <p>Requisition Form</p>
+							</div>
+							<div class="icon">
+							  <i class="fa fa-pencil"></i>
+							</div>
+							<button type="button" class="small-box-footer form-control" id="add_res" data-toggle="modal" data-target="#add_res_modal">Add <i class="fa fa-plus"></i></button>
+								<div class="modal fade" id="add_res_modal" role="dialog">
+									  <div class="modal-dialog modal-lg">
+										<div class="modal-content">
+										  <div class="modal-header bg-primary">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													  <span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title"> <i class="fa fa-plus"></i> Requisition Form</h4>
+											</div>
+												  
+											<span class="help-block">
+												<div class="requisition_added_notification">
+													<div id="loading_image" style="display:none;"></div>
+														<form method="post" id="add_requisition" role="form">
+																<div class="modal-body">
+																		<div class="form-group col-md-4">
+																			<label class="help-block">Course Code : <span class="text-danger">*</span></label>
+																			<input type="text" id="course_code" required name="course_code" class="form-control" placeholder="Enter the course code"/>
+																		</div>
+																		<div class="form-group col-md-8">
+																			<label class="help-block">Course Name : <span class="text-danger">*</span></label>
+																			<input type="text" id="course_name" required name="course_name" class="form-control" placeholder="Enter the course name"/>
+																		</div>
+																		<div class="form-group col-md-4">
+																			<label class="help-block">Department : <span class="text-danger">*</span></label>
+																			<input type="text" disabled id="dept" class="form-control" value="<?php echo $login_query_result['name'];?>">
+																					<input type="hidden" id="dept_id" required name="dept" class="form-control" value="<?php echo $login_query_result['id'];?>">
+																		</div>
+																		<div class="form-group col-md-4">
+																			<label class="help-block">Semester : <span class="text-danger">*</span></label>
+																			<select id="sem" required name="sem" class="form-control">
+																				<option val="0">Choose One</option>
+																				<option val="3">3</option>
+																				<option val="4">4</option>
+																				<option val="5">5</option>
+																				<option val="6">6</option>
+																				<option val="7">7</option>
+																				<option val="8">8</option>
+																				<option val="9">9</option>
+																				<option val="10">10</option>
+																			</select>
+																		</div>
+																		
+																		<div class="form-group col-md-4">
+																			<label class="help-block">Number of Divisions<span class=""></span></label>
+																			<input type="text" class="form-control" required id="no_div" name="no_div" placeholder="Enter the number of divisions"/>
+																		</div>
+																		<div class="form-group col-md-4">
+																			<label class="help-block">Total Number of Students<span class=""></span></label>
+																			<input type="text" class="form-control" required id="no_students" name="no_students" placeholder="Enter the number of students"/>
+																		</div>
+																		<div class="form-group col-md-4">
+																			<label class="help-block">Academic Year : </label>
+																			<input type="text" class="form-control" required id="aca_year" name="aca_year" placeholder="Enter the Academic Year"/>
+																		</div>
+																	
+																		<div class="form-group col-md-4">
+																			<label class="help-block">Software Requirement :<span class="text-danger">*</span></label>
+																			<textarea class="form-control" required id="req" name="req" rows="2" cols="2"></textarea>
+																			
+																		</div>
+																		
+																		<div class="clearfix"></div>
+																</div>
+																	
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Close</button>
+																	<button type="reset" class="btn btn-default btn-flat"></i> Reset</button>
+																	<button type="submit" class="btn btn-primary btn-flat" id="add_requisition"><i class="fa fa-check"></i> Submit</button>
+																</div>
+														</form>
+														</div>
+											</span><!--end of help block-->
+									</div>
+									<!-- /.modal-content -->
+								  </div>
+								  <!-- /.modal-dialog -->
+								</div>
+								<!-- /.modal -->
+						</div>
+					</div> <!-- End of div and modal-->
+						<!-- The content to display requisition given by the concerned department-->
+						<div class="col-md-12">
+		          <div class="box box-solid">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">Requisition List</h3>
+		            </div>
+		            <div class="box-body">
+		           
+		            		<table class="table table-bordered table-responsive">
+		            			<thead>
+		            				<tr>
+		            					<th>Sl.No</th>
+		            					<th>Course Name</th>
+		            					<th>Course Code</th>
+		            					<th>No of Divisions</th>
+		            					<th>Total Strength</th>
+		            					<th>Academic Year</th>
+		            					<th>Software Requirement</th>
+		            					<th>Actions</th>
+		            				</tr>
+		            			</thead>
+		            			<tbody>
+		            			<?php 
+		            				$requisition_list_query = "SELECT * FROM courses WHERE 1=1 AND deptid=".$login_query_result ['id'];
+		            				$requisition_list = db_all($requisition_list_query);
+		            				$list_string = '';
+		            				$i=1;
+		            				//print_r($requisition_list);
+		            				foreach($requisition_list AS $list_row){
+		            							$list_string .="<tr>
+													            					<td>".$i."</td>
+													            					<td>".$list_row['coursename']."</td>
+													            					<td>".$list_row['coursecode']."</td>
+													            					<td>".$list_row['divisions']."</td>
+													            					<td>".$list_row['strength']."</td>
+													            					<td>".$list_row['academicyear']."</td>
+													            					<td>".$list_row['softwarereq']."</td>
+													            					<td>
+													            						<button class='btn btn-warning'><i class='fa fa-pencil'></i></button>
+													            						<button class='btn btn-danger'><i class='fa fa-times'></i></button>
+													            					</td>
+													            				</tr>";
+													            		$i++;
+		            				}
+		            				echo $list_string;
+		            			?>
+		            				
+		            			</tbody>
+		            		</table>
+		            </div>
+		          </div>
+	        </div>
+		<?php }?>
+			  <!-- /.row (main row) -->
+				</section>
+
+			</div>
 	<?php //mysqli_close($con);?>
 </section>
     <!-- /.content -->
@@ -321,6 +511,9 @@ include('pages/required/tables.php');
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="plugins/table2excel/dist/jquery.table2excel.min.js"></script>
 
@@ -328,60 +521,20 @@ include('pages/required/tables.php');
 $(document).ready(function(){	
 	//for clock
   setInterval('updateClock()', 1000);
-  
-/*Commented on 16/3/2022 , as its not needed as per the requirement.
- 	//for auto Selecting the status of selected category
-	$(document).on('change','.res_cat',function(e){
+ 
+ //Date range picker
+    $('#reservation').daterangepicker();
+	
+	$(document).on('click','.set_date_button',function(e){
 		e.preventDefault();
-		var category_id = $(this).val();
-		//alert(name_string);
-		var url = 'ajax/generate_catagory_status_list.ajax.php';
-		if(category_id >0){
-		$.post(
-			url,{
-				c1 : category_id
-			},
-			function(data,status){
-					$('.res_status').html(data);
-			});
-		}else{
-			alert("Choose the correct catogory");
-		}	
-	});
-	*/
-	$(document).on('click','#optionsRadios2',function(e){
-		e.preventDefault();
-		var raddio_button_val = $(this).val();
-		if( raddio_button_val == 1){
-			$('.upload_image').removeClass('hidden');
-			$('.type_text').addClass('hidden');
-		}else{
-			$('.type_text').removeClass('hidden');
-			$('.upload_image').addClass('hidden');
-		}
-	});
-
-	$(document).on('click','.extra_email',function(e){
-		e.preventDefault();
-		//alert('clicked');
-		var content = '<label class="help-block"> Add Email Address(es) <span class="text-danger"> if multiple , seperate them with qummas (,)</span></label><div class="input-group"><input type="text" class="form-control" name="extra-emails"/><div class="input-group-btn"><button class="btn btn-warning btn-flat no-extra-emails">No</button></div></div>';
-		$('.extra-info-mails').html(content);
+		$('.calender_div').toggleClass('hidden');
+		$('.set_button').toggleClass('hidden');
 
 	});
-
-	$(document).on('click','.no-extra-emails',function(e){
-		e.preventDefault();
-		//alert('clicked');
-		
-		$('.extra-info-mails').empty();
-
-	});
-
-
 	
 	
 	//form processing for storing resolution data.
-	$(document).on('submit','#res_add',function(e){
+	$(document).on('submit','#add_requisition',function(e){
 		e.preventDefault();
 		/*var res_title = $('#res_title').val();
 		var cat_id = $('#cat_id').val();
@@ -405,13 +558,13 @@ $(document).ready(function(){
 			//var formData = new FormData()
 			//alert('Everything is filled up');
 			$.ajax({
-				url: 'ajax/save_resolution_data.ajax.php', 
+				url: 'ajax/save_requisition_data.ajax.php', 
 				type: 'POST',
 				data: new FormData(this),
 				processData: false,
 				contentType: false,
 				success: function(data) {
-					$('.resolution_added_notification').html(data);
+					$('.requisition_added_notification').html(data);
 					setTimeout(function () {
 							window.location.reload();
 						}, 2000);
@@ -634,6 +787,10 @@ $(document).on('click','#comp_generate',function(e){
 $(function() {
 //Date picker
     $('#datepicker1').datepicker({
+    	autoclose: true,
+    	 setDate : new Date()
+    });
+    $('#datepicker2').datepicker({
     	autoclose: true,
     	 setDate : new Date()
     });

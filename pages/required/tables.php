@@ -3,7 +3,7 @@
 	$tables = array(
 		1 => 
 			array (
-				'res_master' => 'SNO, RES_TITLE, CID, DEPT, RESDATE, RESCODE, RESNO, RES_STATUS_ID, RES_IMAGE_URL, RES_TEXT, AID, CRDATE, STATUS'
+				'courses' => 'cid, coursecode, coursename, deptid, sem, divisions, strength, softwarereq, academicyear, allocation_status'
 				),
 		2 => 
 			array (

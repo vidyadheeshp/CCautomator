@@ -5,12 +5,13 @@
 		//$db_select = mysqli_select_db("em", $con);
 		$query = mysqli_query($con,$sql_query);
 		// Fetch all
-
-		$rows = array();
+		//print_r($query);
+		$rows= array();
         while ($row = mysqli_fetch_assoc($query))
         {
             $rows[] = $row;
         }
+        //print_r ($rows);
         return $rows;
 	}
 
@@ -57,20 +58,12 @@
 		//echo $sql;
 		//$result = mysqli_query($con, $sql);
 		//for fetching the inserted if part is used for a custome table called equipment_master.
-		if($table_no == 1){
-			if (mysqli_query($con, $sql) == TRUE) {
-					 $last_id = mysqli_insert_id($con);
-					 return $last_id;
-			} else {
-				return 0;
-			}
-		}else{
+		
 			if (mysqli_query($con,$sql) == TRUE) {
 					return 1;
 				}else{
 					return 0;
 				}
-		}	
 			//return $return_msg;
 	}
 	

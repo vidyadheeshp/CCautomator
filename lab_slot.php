@@ -223,12 +223,12 @@ include('pages/required/tables.php');
 			  <img src="images/GIT-logo.jpg<?php //echo ($login_query_result['pro_image'] == NULL ? 'boxed-bg.jpg' : $login_query_result['pro_image']);?>" class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-			  <p><?php /*if(isset($_SESSION['name'])) {echo  $_SESSION['name'];}?></p>
-			 <?php if($login_query_result ['USERTYPE'] == 1 || $login_query_result ['USERTYPE'] == 2 || $login_query_result ['USERTYPE'] == 6){*/?>
+			  <p><?php if(isset($_SESSION['name'])) {echo  $_SESSION['name'];}?></p>
+			 <?php if($login_query_result ['id'] == 1) {?>
 				  <a href="#"><i class="fa fa-circle text-success"></i> Admin</a>
-				<?php //}else{?>
+				<?php }else{?>
 				  <a href="#"><i class="fa fa-circle text-aqua"></i> User</a>
-				<?php //}?>
+				<?php }?>
 			</div>
 		  </div>
 		  <span style="height:50px;" id="clock" class="form-control" value=""></span>

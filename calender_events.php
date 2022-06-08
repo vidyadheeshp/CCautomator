@@ -25,6 +25,7 @@
 			'title' => $rs['coursename'],
 			'start' => $rs['start'],
 			'end' => $rs['end'],
+			'daysOfWeek' => [ '3' ],
 			'allDay' => false,
 			'startStr' =>  $rs['start_time'],
 			'endStr' => $rs['end_time'],
