@@ -327,7 +327,7 @@ include('pages/required/tables.php');
 		            					</div>
 		            			</div>
 		            			<div class="col-md-6">
-		            					<button class="btn btn-success allocate_slots"><i class="fa fa-tasks"></i> Allocate</button>
+		            					<button class="btn btn-success btn-lg allocate_slots"><i class="fa fa-tasks"></i> Allocate</button>
 		            					
 		            			</div>
 
