@@ -7,7 +7,7 @@
 				),
 		2 => 
 			array (
-				'res_status_master' => 'SNO, RID, CID, SID, MDATE, REMARK, STATUS'
+				'academic_year' => 'id, from_date, to_date, aca_year'
 			),
 		3 => 
 			array (

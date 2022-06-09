@@ -294,46 +294,116 @@ include('pages/required/tables.php');
 				  <?php 
 				  	if($login_query_result ['id'] == 1){
 				  ?>
-					 	<div class="col-md-12">
-		          <div class="box box-solid">
-		            <div class="box-header with-border">
-		              <h3 class="box-title">Lab Allocations Tasks</h3>
-		            </div>
-		            <div class="box-body">
-		           				<div class="col-md-6">
-		            					<button class="btn btn-primary set_date_button"><i class="fa fa-calendar"></i> Set Date</button>
-		            					<div class="clearfix"></div>
-		            					<div class="clearfix"></div>
-		            					<br/>
-		            					<div class="col-md-6 calender_div hidden">
+				  <div class="row">
+						 	<div class="col-md-8">
+			          <div class="box box-solid">
+			            <div class="box-header with-border">
+			              <h3 class="box-title">Lab Allocations Initiation</h3>
+			            </div>
+			            <div class="box-body">
+			           				<div class="col-md-8">
+			           					<?php 
+			           							$query_to_check_requisitions_open = "SELECT * FROM academic_year WHERE 1=1 ORDER BY id DESC LIMIT 1";
+			           								$result_from_query = db_one($query_to_check_requisitions_open);
+			           								$exploded_year = explode('-',$result_from_query['aca_year']);
+			           								$check_year_boolean = in_array(date('Y'),$exploded_year);
+			           								//echo $check_year_boolean;
+			           								if($result_from_query['to_date'] != '0000-00-00' && $check_year_boolean == true){
 
-		            							 <!-- Date range -->
-								              <div class="form-group">
-								                <div class="input-group">
-								                  <div class="input-group-addon">
-								                    <i class="fa fa-calendar"></i>
-								                  </div>
-								                  <input type="text" class="form-control pull-right" id="reservation">
-								                </div>
+			           						?>
+			           						<div class="col-md-6">
+			           							<?php 
+			           								/*$query_to_check_requisitions_open = "SELECT * FROM academic_year WHERE 1=1 ORDER BY id DESC LIMIT 1";
+			           								$result_from_query = db_one($query_to_check_requisitions_open);
+			           								
+			           								if($check_year_boolean == true){*/
+			           							?>
+			            						<button class="btn btn-success  set_date_button" ><i class="fa fa-tasks"></i> Open Requisition Form</button>
+			            					<?php }else{?>
+			            					</div>
+			            					<div class="col-ms-6">
+			            							<!-- button for closing the requisition applikcation-->
+			            							<button class="btn btn-danger close_btn" data-toggle="modal" data-target="#close_req_modal"><i class="fa fa-times"></i> Close Requisition</button>
+			            						<?php }?>
+																	<div class="modal fade" id="close_req_modal" role="dialog">
+																		  <div class="modal-dialog">
+																			<div class="modal-content">
+																			  <div class="modal-header bg-warning">
+																						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						  <span aria-hidden="true">&times;</span></button>
+																						<h4 class="modal-title"> <i class="fa fa-plus"></i> Requisition Form</h4>
+																				</div>
+																					  
+																				<span class="help-block">
+																					<div class="requisition_close_notification">
+																						<div id="loading_image" style="display:none;"></div>
+																							<form method="post" role="form">
+																									<div class="modal-body">
+																											<h4>Are you sure.? You want to close the Requisition Form</h4>
+																									</div>
+																										
+																									<div class="modal-footer">
+																										<button type="button" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Close</button>
+																										<button type="submit" class="btn btn-primary btn-flat" id="close_requisition"><i class="fa fa-check"></i> Close</button>
+																									</div>
+																							</form>
+																							</div>
+																				</span><!--end of help block-->
+																		</div>
+																		<!-- /.modal-content -->
+																	  </div>
+																	  <!-- /.modal-dialog -->
+																	</div>
+																	<!-- /.modal -->
+			            					</div>
+			            					<div class="clearfix"></div>
+			            					<br/>
+			            					<div class="col-md-6 calender_div hidden">
+			            						<div class="form-group">
+			            								<label class="help-block">Academic Year</label>
+			            								<select class="form-control aca_year">
+			            									<option val="0">Choose Academic Year</option>
+			            									<option val="2021-22">2021-22</option>
+			            									<option val="2022-23">2022-23</option>
+			            								</select>
+			            							</div>
+			            							 <!-- Date range -->
+			            							 <label class="help-block">Start Date</label>
+									              <div class="form-group">
+									                <div class="input-group">
+									                  <div class="input-group-addon">
+									                    <i class="fa fa-calendar"></i>
+									                  </div>
+									                  <input type="text" class="form-control pull-right start_date" id="datepicker">
+									                </div>
 
-								                <!-- /.input group -->
-								              </div>
-								              <!-- /.form group -->
-								              
-		            					</div>
-		            					 <button class="btn btn-primary set_button hidden"><i class="fa fa-check"></i> Set</button>
-		            					<div class="col-ms-6">
-		            						
-		            					</div>
-		            			</div>
-		            			<div class="col-md-6">
-		            					<button class="btn btn-success btn-lg allocate_slots"><i class="fa fa-tasks"></i> Allocate</button>
-		            					
-		            			</div>
+									                <!-- /.input group -->
+									              </div>
+									              <!-- /.form group -->
+									              	<button class="btn btn-warning	hidden set_button"  style="align: center"><i class="fa fa-check"></i> Set</button>	
+			            					
+			            					</div>
+			            					
+			            					
+			            			</div>
+			            </div>
+			          </div>
+		        </div>
 
-		          </div>
-		          </div>
-	        </div>
+		        <div class="col-md-4">
+			          <div class="box box-solid">
+			            <div class="box-header with-border">
+			              <h3 class="box-title">Lab Allocations Tasks</h3>
+			            </div>
+			            <div class="box-body">
+			            			<div class="col-md-4">
+			            					<button class="btn btn-success btn-lg allocate_slots" <?php echo (($result_from_query['to_date'] == '0000-00-00')? 'disabled' : '') ?>><i class="fa fa-check"></i> Allocate</button>
+			            					
+			            			</div>
+			            </div>
+			           </div>
+			      </div>
+		      </div> 
 					<?php
 					//content of Login for other users 
 				}else{
@@ -582,6 +652,52 @@ $(document).ready(function(){
 		//}
 				
 	});
+
+//for setting the initial date for the academic year to start with requisition form.
+$(document).on('click','.set_button',function(e){
+		e.preventDefault();
+		//alert("clicked");
+		var aca_year = $('.aca_year').val();
+		var start_date = $('.start_date').val();
+		//alert(aca_year+'-'+start_date);
+		var aca_year_date_set_url = 'ajax/aca_year_date_set.ajax.php';
+		if(aca_year == 0 || start_date == ''){
+			alert('Fill the data completely');
+		}else{
+		$("div #loading_image").removeAttr("style");
+		$.post(
+				aca_year_date_set_url,{
+					p1 : aca_year, p2: start_date
+				},
+				function(data,status){
+						$('.calender_div').html(data);
+						/*setTimeout(function () {
+							window.location.reload();
+						}, 3000);*/
+					});
+		}
+
+	});
+
+///Incomplete
+$(document).on('click','#close_requisition',function(e){
+		e.preventDefault();
+		//alert('clicked');
+		var close_url = 'ajax/close_requisition_form.ajax.php';
+		$.post(
+				close_url,{
+					p1 : 'Nil'
+				},
+				function(data,status){
+						$('.requisition_close_notification').html(data);
+					setTimeout(function () {
+							window.location.reload();
+						}, 3000);
+					});
+
+	});
+
+
 //****** Compliance Generation *******//
 $(document).on('click','#comp_generate',function(e){
 		e.preventDefault();
@@ -921,19 +1037,6 @@ $(function() {
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!--script src="dist/js/pages/dashboard2.js"></script-->
 
-<!--IMPORTANT CUSTOM JS FILES with php extension for fetching statistical data.-->
-<!--for statistics of total requests from user-->
-<script type="text/javascript" src="pages/principal/display_dept_overall_stat.php"></script>
-<!--for statistics of Monthly requests from user-->
-<script type="text/javascript" src="pages/user_statistics_pie_chart_monthly.php"></script>
-<!-- IMPORTANT CUSTOM JS FILES ENDS-->
-
-<!--Bar chart data (Principal Login)-->
-<!-- ChartJS 1.0.1  IMPORTANT (REQUIRED FOR CHART)-->
-<script src="plugins/chartjs/Chart.min.js"></script>
-<script type="text/javascript" src="pages/principal/display_monthwise_barchart.php"></script>
-<script type="text/javascript" src="pages/principal/display_categorywise_barchart.php"></script>
-<script type="text/javascript" src="pages/principal/display_sanctiningA_wise_barchart.php"></script>
 
 <!--Bar chart data ends-->	
 	

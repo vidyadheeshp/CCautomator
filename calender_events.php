@@ -23,8 +23,8 @@
 		$data [] = array(
 			'id' => $rs['allocationid'],
 			'title' => $rs['coursename'],
-			'start' => $rs['start'],
-			'end' => $rs['end'],
+			'start' => $rs['date'],
+			'end' => $rs['date'],
 			'daysOfWeek' => [ '3' ],
 			'allDay' => false,
 			'startStr' =>  $rs['start_time'],
