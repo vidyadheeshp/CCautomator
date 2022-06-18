@@ -303,7 +303,7 @@ include('pages/required/tables.php');
 			            <div class="box-body">
 			           				<div class="col-md-8">
 			           					<?php 
-			           							$query_to_check_requisitions_open = "SELECT * FROM academic_year WHERE 1=1 ORDER BY id DESC LIMIT 1";
+			           							$query_to_check_requisitions_open = "SELECT *, DATE_FORMAT(from_date,'%d-%m-%Y') AS frm_date, DATE_FORMAT(to_date,'%d-%m-%Y') AS t_date FROM academic_year WHERE 1=1 ORDER BY id DESC LIMIT 1";
 			           								$result_from_query = db_one($query_to_check_requisitions_open);
 			           								$exploded_year = explode('-',$result_from_query['aca_year']);
 			           								$check_year_boolean = in_array(date('Y'),$exploded_year);
@@ -311,13 +311,9 @@ include('pages/required/tables.php');
 			           								if($result_from_query['to_date'] != '0000-00-00' && $check_year_boolean == true){
 
 			           						?>
+			           							<h5><?php echo 	"The Current Academic Year (Sem Duration) is <strong>".$result_from_query['frm_date']." : ".$result_from_query['t_date']."</strong>"; ?></h5>
 			           						<div class="col-md-6">
-			           							<?php 
-			           								/*$query_to_check_requisitions_open = "SELECT * FROM academic_year WHERE 1=1 ORDER BY id DESC LIMIT 1";
-			           								$result_from_query = db_one($query_to_check_requisitions_open);
-			           								
-			           								if($check_year_boolean == true){*/
-			           							?>
+			           							
 			            						<button class="btn btn-success  set_date_button" ><i class="fa fa-tasks"></i> Open Requisition Form</button>
 			            					<?php }else{?>
 			            					</div>
@@ -363,8 +359,8 @@ include('pages/required/tables.php');
 			            								<label class="help-block">Academic Year</label>
 			            								<select class="form-control aca_year">
 			            									<option val="0">Choose Academic Year</option>
-			            									<option val="2021-22">2021-22</option>
-			            									<option val="2022-23">2022-23</option>
+			            									<option val="2021-22">2021-2022</option>
+			            									<option val="2022-23">2022-2023</option>
 			            								</select>
 			            							</div>
 			            							 <!-- Date range -->
@@ -412,8 +408,11 @@ include('pages/required/tables.php');
 				  <!-- small box -->
 						<div class="small-box bg-aqua">
 							<div class="inner">
-							 <?php //$res_count_query ="SELECT count(*) AS res_count FROM res_master rm WHERE 1=1";
-								// $Resolutions_count = db_one($res_count_query);
+							 <?php 
+							 	$query_to_check_requisitions_open = "SELECT *, DATE_FORMAT(from_date,'%d-%m-%Y') AS frm_date, DATE_FORMAT(to_date,'%d-%m-%Y') AS t_date FROM academic_year WHERE 1=1 ORDER BY id DESC LIMIT 1";
+			           								$result_from_query = db_one($query_to_check_requisitions_open);
+			           								$exploded_year = explode('-',$result_from_query['aca_year']);
+			           								$check_year_boolean = in_array(date('Y'),$exploded_year);
 							?>
 							  <h3><?php //echo($Resolutions_count['res_count']); ?></h3>
 
@@ -422,7 +421,7 @@ include('pages/required/tables.php');
 							<div class="icon">
 							  <i class="fa fa-pencil"></i>
 							</div>
-							<button type="button" class="small-box-footer form-control" id="add_res" data-toggle="modal" data-target="#add_res_modal">Add <i class="fa fa-plus"></i></button>
+							<button type="button" class="small-box-footer form-control" id="add_res" <?php echo (($result_from_query['to_date'] != '0000-00-00')? 'disabled':'');?> data-toggle="modal" data-target="#add_res_modal">Add <i class="fa fa-plus"></i></button>
 								<div class="modal fade" id="add_res_modal" role="dialog">
 									  <div class="modal-dialog modal-lg">
 										<div class="modal-content">
