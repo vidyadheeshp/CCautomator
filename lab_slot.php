@@ -301,14 +301,14 @@ include('pages/required/tables.php');
 	            </div>
 	            <div class="box-body">
 	            		<div class="col-md-4">
-	            			<select class="form-control">
-	            				<option val="0">choose one</option>
+	            			<select class="form-control" id="lab_list">
+	            				<option value="0">choose one</option>
 	            				<?php 
 	            				$lab_list_str = '';
 	            					$lab_query = "SELECT * FROM labs WHERE 1=1";
 	            					$lab_list = db_all($lab_query);
 	            					foreach($lab_list AS $labname){
-	            							$lab_list_str .="<option val='".$labname['id']."''>".$labname['labname']."</option>"; 
+	            							$lab_list_str .="<option value='".$labname['labid']."'>".$labname['labname']."</option>"; 
 
 	            					}
 	            					echo $lab_list_str;
@@ -360,8 +360,43 @@ include('pages/required/tables.php');
 	            <!-- /.box-body -->
 	          </div>
 	          <!-- /. box -->
+	          <div class="hidden_values">
+	          	<input type="hidden" class="" id="lab_id" value="">
+	          </div>
 	        </div>
 	        <!-- /.col -->
+
+	        	<!-- /.modal -->
+				<!--Modal for viewing the slot allocated-->
+				<div class="modal fade" id="view_slot_alloted" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header bg-primary">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title"><i class="fa fa-book"></i> 
+									Slot Alloted Data
+								
+								</h4>
+							</div>
+							<div class="modal-body">
+								<div class="slot_slloted_data">
+									<div id="loading_image" style="display:none;"></div>
+									<!--button class="btn btn-warning view_booking_details hidden">View Details</button>
+									<input type="hidden" id="booking_id" value=""/-->
+									
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default pull-right btn-flat" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					<!-- /.modal-content -->
+					</div>
+				  <!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal Close for Viewing the alloted slot data-->
+
 	      </div>
 	      <!-- /.row -->
 
@@ -398,8 +433,16 @@ include('pages/required/tables.php');
 $(document).ready(function(){	
 	//for clock
   setInterval('updateClock()', 1000);
+
+  //for setting the lab_id to fetch respctive events in the calender later.
+  $(document).on('change','#lab_list',function(e){ 
+  	e.preventDefault(); 
+  	var current_lab_no	= $(this).val(); 
+  	$('#lab_id').val(current_lab_no); 
+	  //alert($ ('#lab_id').val());
+  });
   
-   /*Script have to be written here*/
+  
 	
 });
 </script>
@@ -445,6 +488,7 @@ $(function() {
 <script src="plugins/select2/select2.full.min.js"></script><!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- fullCalendar 2.2.5 -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="plugins/fullcalendar/fullcalendar.min.js"></script>
 <!-- Page specific script -->
@@ -502,6 +546,32 @@ $(function() {
       maxTime: "18:00:00",
       //Random default events
       events : 'calender_events.php',
+      //viewing the clicked event
+			eventClick:  function(event, jsEvent, view) {
+			//alert(event.id);
+           // $('#booked_by_name').text(event.title);
+           // $('#booked_by_date').text(event.start.format());
+			//$('#booking_id').val(event.id);
+            //$('#eventUrl').attr('href',event.url);
+            $('#view_slot_alloted').modal();
+			 //for loading the booked seva
+			 var view_url = "ajax/view_slot_details.ajax.php";
+		
+			$("div #loading_image").removeAttr("style");
+			$.post(
+					view_url,{
+						p1 : event.id
+					},
+					function(data,status){
+						
+							$('.slot_slloted_data').html(data);
+							
+							// setTimeout(function () {
+									// window.location.reload();
+									// }, 2000);
+					});
+			//alert('seva booking modal');
+     },
       editable: true,
      /* droppable: true, // this allows things to be dropped onto the calendar !!!
       drop: function (date, allDay) { // this function is called when something is dropped

@@ -3,6 +3,10 @@
 	include('pages/required/db_connection.php');
 	include('pages/required/tables.php');
 	require('pages/required/functions.php');
+
+	//$lab_id = $_POST['Id'];
+
+	//echo $lab_id;
 	
 	$data = array();
 	
@@ -12,6 +16,7 @@
 				c.coursecode,
 				la.labname,
 				c.deptid,
+				DATE_FORMAT(l.date_start,''),
 				DATE_FORMAT(l.date_start,'%h:%m:%s')AS start_time,
 				DATE_FORMAT(l.date_end,'%h:%m:%s') AS end_time
 			  FROM 
@@ -73,8 +78,6 @@
 			'allDay' => false,
 			'startStr' =>  $rs['start_time'],
 			'endStr' => $rs['end_time'],
-			'startRecur' => "",
-			'endRecur' => "",
           	'backgroundColor'=> $backgroundcolor, //Info (aqua)
           	'borderColor' => $bordercolor //Info (aqua)
 			);
